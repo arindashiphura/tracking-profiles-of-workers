@@ -257,8 +257,8 @@ const ProfileList = () => {
       </main>
       {/* View Profile Modal */}
       {viewProfile && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl font-bold cursor-pointer"
               onClick={() => setViewProfile(null)}
@@ -296,8 +296,8 @@ const ProfileList = () => {
       )}
       {/* Edit Profile Modal */}
       {editProfile && editForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl font-bold cursor-pointer"
               onClick={() => setEditProfile(null)}
@@ -393,8 +393,8 @@ const ProfileList = () => {
       )}
       {/* Edit Review Modal */}
       {editReview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <h3 className="text-xl font-bold mb-4 text-blue-700">Review All Details</h3>
             <div className="flex flex-col items-center mb-4">
               {editReview.reviewPhoto ? (
@@ -444,8 +444,8 @@ const ProfileList = () => {
       )}
       {/* Edit Success Confirmation Modal */}
       {editSuccess && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <h3 className="text-xl font-bold mb-4 text-green-700">Last Profile Updated Successfully!</h3>
             <div className="flex flex-col items-center mb-4">
               {editSuccess.photo ? (
@@ -483,8 +483,8 @@ const ProfileList = () => {
       )}
       {/* Delete Confirmation Modal */}
       {deleteProfile && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <h3 className="text-xl font-bold mb-4 text-red-700">Confirm Delete</h3>
             <div className="flex flex-col items-center mb-4">
               {deleteProfile.photo ? (
@@ -500,7 +500,7 @@ const ProfileList = () => {
             <div className="mb-2"><span className="font-semibold">Next of Kin 1:</span> {deleteProfile.kin1}</div>
             <div className="mb-2"><span className="font-semibold">Next of Kin 2:</span> {deleteProfile.kin2}</div>
             <div className="mb-2">
-              <span className="font-semibold">Available Days:</span>
+              <span className="font-semibold">Available Working Days:</span>
               <div className="flex gap-2 flex-wrap mt-1">
                 {deleteProfile.availableDays && deleteProfile.availableDays.length > 0 ? (
                   deleteProfile.availableDays.map((day, i) => (
@@ -530,8 +530,8 @@ const ProfileList = () => {
       )}
       {/* Delete Success Modal */}
       {deleteSuccess && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md relative">
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
             <h3 className="text-xl font-bold mb-4 text-green-700">Profile Deleted Successfully!</h3>
             <button
               className="mt-6 bg-green-600 text-white border-none px-8 py-2 rounded font-bold cursor-pointer"

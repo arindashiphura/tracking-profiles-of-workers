@@ -162,7 +162,7 @@ const ProfileForm = ({ onProfileAdded }) => {
             </div>
             {/* Available Days */}
             <div className="mb-4">
-              <label className="font-bold mb-2 block">Available Days:</label>
+              <label className="font-bold mb-2 block">Available Working Days:</label>
               <div className="flex gap-3 flex-wrap">
                 {daysOfWeek.map((day) => (
                   <label key={day} className="flex items-center gap-1 cursor-pointer">
@@ -182,24 +182,25 @@ const ProfileForm = ({ onProfileAdded }) => {
             </div>
           </div>
         </div>
+        {/* Display selected days for demonstration */}
+        <div className="mt-6 mb-6">
+          <label className="font-bold text-blue-900 block mb-2">Selected Days:</label>
+          <div className="flex gap-2 flex-wrap">
+            {form.availableDays.length === 0 ? (
+              <span className="text-gray-400">None</span>
+            ) : (
+              form.availableDays.map((day) => (
+                <span key={day} className="bg-blue-900 text-white rounded-full px-4 py-1 text-sm font-medium shadow">{day}</span>
+              ))
+            )}
+          </div>
+        </div>
         <div className="flex gap-4">
           <button type="submit" className="bg-orange-400 text-white border-none px-8 py-2 rounded font-bold cursor-pointer">SAVE</button>
           <button type="button" onClick={handleReset} className="bg-blue-900 text-white border-none px-8 py-2 rounded font-bold cursor-pointer shadow">RESET</button>
         </div>
       </form>
-      {/* Display selected days for demonstration */}
-      <div className="mt-6">
-        <label className="font-bold text-blue-900 block mb-2">Selected Days:</label>
-        <div className="flex gap-2 flex-wrap">
-          {form.availableDays.length === 0 ? (
-            <span className="text-gray-400">None</span>
-          ) : (
-            form.availableDays.map((day) => (
-              <span key={day} className="bg-blue-900 text-white rounded-full px-4 py-1 text-sm font-medium shadow">{day}</span>
-            ))
-          )}
-        </div>
-      </div>
+      
     </div>
   );
 };
