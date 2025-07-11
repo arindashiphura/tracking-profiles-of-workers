@@ -192,7 +192,7 @@ const WeeklySchedule = () => {
                       <div key={profile._id} className="flex items-center gap-1 md:gap-2">
                         {profile.photo ? (
                           <img 
-                            src={`http://localhost:10000/uploads/${profile.photo}`} 
+                            src={`${import.meta.env.VITE_API_URL}/uploads/${profile.photo}`} 
                             alt="Profile" 
                             className="w-4 h-4 md:w-6 md:h-6 rounded-full object-cover"
                           />
