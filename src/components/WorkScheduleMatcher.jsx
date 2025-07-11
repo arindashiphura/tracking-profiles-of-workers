@@ -22,7 +22,7 @@ const WorkScheduleMatcher = () => {
   const fetchProfiles = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:10000/api/profiles');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profiles`);
       if (response.ok) {
         const data = await response.json();
         setProfiles(data);
@@ -185,7 +185,7 @@ const WorkScheduleMatcher = () => {
                     <div className="flex-shrink-0">
                       {profile.photo ? (
                         <img 
-                          src={`http://localhost:10000/uploads/${profile.photo}`} 
+                          src={`${import.meta.env.VITE_API_URL}/uploads/${profile.photo}`} 
                           alt="Profile" 
                           className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                         />
