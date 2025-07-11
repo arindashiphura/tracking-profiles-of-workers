@@ -98,7 +98,7 @@ const Reserved = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-md shadow p-8 m-8">
+      <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
         <div className="flex items-center justify-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900"></div>
           <span className="ml-2">Loading profiles...</span>
@@ -109,7 +109,7 @@ const Reserved = () => {
 
   if (error) {
     return (
-      <div className="bg-white rounded-md shadow p-8 m-8">
+      <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
         <div className="text-red-600 text-center">{error}</div>
         <button 
           onClick={fetchProfiles}
@@ -124,16 +124,16 @@ const Reserved = () => {
   const filteredProfiles = getFilteredAndSortedProfiles();
 
   return (
-    <div className="bg-white rounded-md shadow p-8 m-8">
-      <div className="flex items-center gap-2 mb-6">
-        <FaUser className="text-blue-900 text-2xl" />
-        <h2 className="text-2xl font-bold text-blue-900">Reserved - All Profiles</h2>
+    <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
+      <div className="flex items-center gap-2 mb-4 md:mb-6">
+        <FaUser className="text-blue-900 text-xl md:text-2xl" />
+        <h2 className="text-xl md:text-2xl font-bold text-blue-900">Reserved - All Profiles</h2>
       </div>
 
       {/* Search and Filter Controls */}
-      <div className="mb-6 space-y-4">
+      <div className="mb-4 md:mb-6 space-y-3 md:space-y-4">
         {/* Search Bar */}
-        <div className="flex gap-4">
+        <div className="flex flex-col lg:flex-row gap-3 md:gap-4">
           <div className="flex-1 relative">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -141,14 +141,14 @@ const Reserved = () => {
               placeholder="Search by name, email, or phone..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent text-sm md:text-base"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <select
               value={filterDay}
               onChange={(e) => setFilterDay(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
+              className="px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent text-sm md:text-base"
             >
               <option value="">All Days</option>
               {daysOfWeek.map((day) => (
@@ -158,7 +158,7 @@ const Reserved = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent"
+              className="px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent text-sm md:text-base"
             >
               <option value="name">Sort by Name</option>
               <option value="days">Sort by Working Days</option>
@@ -168,13 +168,13 @@ const Reserved = () => {
         </div>
 
         {/* Results Summary */}
-        <div className="flex items-center justify-between text-sm text-gray-600">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-xs md:text-sm text-gray-600">
           <div>
             Showing {filteredProfiles.length} of {profiles.length} profiles
             {searchTerm && ` matching "${searchTerm}"`}
             {filterDay && ` working on ${filterDay}`}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <span>Total Staff: {profiles.length}</span>
             <span>Active Filters: {(searchTerm ? 1 : 0) + (filterDay ? 1 : 0)}</span>
           </div>
@@ -183,76 +183,76 @@ const Reserved = () => {
 
       {/* Profiles List */}
       {filteredProfiles.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
-          <FaUser className="text-4xl mx-auto mb-2 text-gray-300" />
-          <p className="text-lg font-medium mb-2">No profiles found</p>
-          <p className="text-sm">Try adjusting your search or filter criteria</p>
+        <div className="text-center py-8 md:py-12 text-gray-500">
+          <FaUser className="text-3xl md:text-4xl mx-auto mb-2 text-gray-300" />
+          <p className="text-base md:text-lg font-medium mb-2">No profiles found</p>
+          <p className="text-sm md:text-base">Try adjusting your search or filter criteria</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {filteredProfiles.map((profile, index) => (
-            <div key={profile._id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-6">
+            <div key={profile._id} className="border border-gray-200 rounded-lg p-4 md:p-6 hover:shadow-lg transition-shadow">
+              <div className="flex flex-col lg:flex-row items-start gap-4 md:gap-6">
                 {/* Profile Photo */}
                 <div className="flex-shrink-0">
                   {profile.photo ? (
                     <img 
                       src={`http://localhost:9000/uploads/${profile.photo}`} 
                       alt="Profile" 
-                      className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-gray-200"
                     />
                   ) : (
-                    <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
-                      <FaUser className="text-2xl text-gray-400" />
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
+                      <FaUser className="text-xl md:text-2xl text-gray-400" />
                     </div>
                   )}
                 </div>
 
                 {/* Profile Information */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-4 mb-3">
-                    <h3 className="text-xl font-bold text-gray-800">
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-2 md:mb-3">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800 truncate">
                       {profile.firstName} {profile.lastName}
                     </h3>
-                    <span className="bg-blue-900 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-blue-900 text-white px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
                       #{index + 1}
                     </span>
                     {profile.gender && (
-                      <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-gray-100 text-gray-700 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
                         {profile.gender}
                       </span>
                     )}
                   </div>
 
                   {/* Contact Information */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <FaEnvelope className="text-blue-900" />
-                      <span>{profile.email}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
+                    <div className="flex items-center gap-2 text-gray-600 text-sm md:text-base">
+                      <FaEnvelope className="text-blue-900 flex-shrink-0" />
+                      <span className="truncate">{profile.email}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <FaPhone className="text-blue-900" />
+                    <div className="flex items-center gap-2 text-gray-600 text-sm md:text-base">
+                      <FaPhone className="text-blue-900 flex-shrink-0" />
                       <span>{profile.phone}</span>
                     </div>
                   </div>
 
                   {/* Next of Kin */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
                     <div>
-                      <span className="text-sm font-medium text-gray-700">Next of Kin 1:</span>
-                      <div className="text-gray-600">{profile.kin1 || 'Not specified'}</div>
+                      <span className="text-xs md:text-sm font-medium text-gray-700">Next of Kin 1:</span>
+                      <div className="text-gray-600 text-sm md:text-base">{profile.kin1 || 'Not specified'}</div>
                     </div>
                     <div>
-                      <span className="text-sm font-medium text-gray-700">Next of Kin 2:</span>
-                      <div className="text-gray-600">{profile.kin2 || 'Not specified'}</div>
+                      <span className="text-xs md:text-sm font-medium text-gray-700">Next of Kin 2:</span>
+                      <div className="text-gray-600 text-sm md:text-base">{profile.kin2 || 'Not specified'}</div>
                     </div>
                   </div>
 
                   {/* Working Days */}
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <FaCalendarAlt className="text-blue-900" />
-                      <span className="text-sm font-medium text-gray-700">
+                      <FaCalendarAlt className="text-blue-900 flex-shrink-0" />
+                      <span className="text-xs md:text-sm font-medium text-gray-700">
                         Working Days ({getWorkingDaysCount(profile)} days)
                       </span>
                     </div>
@@ -264,8 +264,8 @@ const Reserved = () => {
 
                 {/* Quick Stats */}
                 <div className="flex-shrink-0 text-right">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="text-2xl font-bold text-blue-900">
+                  <div className="bg-gray-50 rounded-lg p-2 md:p-3">
+                    <div className="text-xl md:text-2xl font-bold text-blue-900">
                       {getWorkingDaysCount(profile)}
                     </div>
                     <div className="text-xs text-gray-500">Days</div>
@@ -285,9 +285,9 @@ const Reserved = () => {
 
       {/* Summary Footer */}
       {filteredProfiles.length > 0 && (
-        <div className="mt-8 bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-800 mb-3">Summary Statistics</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div className="mt-6 md:mt-8 bg-gray-50 rounded-lg p-3 md:p-4">
+          <h4 className="font-semibold text-gray-800 mb-3 text-sm md:text-base">Summary Statistics</h4>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-xs md:text-sm">
             <div>
               <div className="text-gray-600">Total Profiles</div>
               <div className="font-bold text-blue-900">{profiles.length}</div>

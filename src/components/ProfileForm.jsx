@@ -100,72 +100,70 @@ const ProfileForm = ({ onProfileAdded }) => {
   };
 
   return (
-    <div className="bg-white rounded-md shadow p-8 m-8">
-      <h2 className="mb-6 text-2xl font-bold">Add New Profile</h2>
+    <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
+      <h2 className="mb-4 md:mb-6 text-xl md:text-2xl font-bold text-gray-800">Add New Profile</h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-8 mb-6">
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-8 mb-4 md:mb-6">
           {/* Photo Upload */}
           <div className="flex flex-col items-center min-w-[120px]">
-            <div className="w-[100px] h-[100px] rounded-full bg-gray-200 mb-3 overflow-hidden flex items-center justify-center">
+            <div className="w-20 h-20 md:w-[100px] md:h-[100px] rounded-full bg-gray-200 mb-3 overflow-hidden flex items-center justify-center">
               {form.photo ? (
                 <img src={URL.createObjectURL(form.photo)} alt="Profile" className="w-full h-full object-cover" />
               ) : (
-                <span className="text-gray-400">Photo</span>
+                <span className="text-gray-400 text-sm md:text-base">Photo</span>
               )}
             </div>
-            <input type="file" accept="image/*" name="photo" onChange={handleChange} className="cursor-pointer" />
+            <input type="file" accept="image/*" name="photo" onChange={handleChange} className="cursor-pointer text-sm" />
             {errors.photo && <div className="text-red-600 text-xs mt-1">{errors.photo}</div>}
           </div>
           {/* Fields */}
-          <div className="flex-1">
-            <div className="flex gap-4 mb-4">
-              <div className="flex-1">
-                <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="First Name" className="w-full p-2 rounded border border-gray-300" />
+          <div className="flex-1 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="First Name" className="w-full p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base" />
                 {errors.firstName && <div className="text-red-600 text-xs mt-1">{errors.firstName}</div>}
               </div>
-              <div className="flex-1">
-                <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="Last Name" className="w-full p-2 rounded border border-gray-300" />
+              <div>
+                <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="Last Name" className="w-full p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base" />
                 {errors.lastName && <div className="text-red-600 text-xs mt-1">{errors.lastName}</div>}
               </div>
             </div>
-            <div className="flex gap-4 mb-4">
-              <div className="flex-1">
-                <input name="email" value={form.email} onChange={handleChange} placeholder="Email Address" className="w-full p-2 rounded border border-gray-300" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <input name="email" value={form.email} onChange={handleChange} placeholder="Email Address" className="w-full p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base" />
                 {errors.email && <div className="text-red-600 text-xs mt-1">{errors.email}</div>}
               </div>
-              <div className="flex-1">
+              <div>
                 <PhoneInput
                   country={'us'}
                   value={form.phone}
                   onChange={handlePhoneChange}
-                  inputClass="w-full !py-2 !pl-10 !pr-2 !rounded !border !border-gray-300"
+                  inputClass="w-full !py-2 md:!py-3 !pl-10 !pr-2 !rounded !border !border-gray-300 text-sm md:text-base"
                   dropdownClass="!z-50"
                   inputStyle={{ width: '100%' }}
                 />
                 {errors.phone && <div className="text-red-600 text-xs mt-1">{errors.phone}</div>}
               </div>
             </div>
-            <div className="flex gap-4 mb-4">
-              <input name="kin1" value={form.kin1} onChange={handleChange} placeholder="Next of Kin 1" className="flex-1 p-2 rounded border border-gray-300" />
-              <input name="kin2" value={form.kin2} onChange={handleChange} placeholder="Next of Kin 2" className="flex-1 p-2 rounded border border-gray-300" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input name="kin1" value={form.kin1} onChange={handleChange} placeholder="Next of Kin 1" className="flex-1 p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base" />
+              <input name="kin2" value={form.kin2} onChange={handleChange} placeholder="Next of Kin 2" className="flex-1 p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base" />
             </div>
-            <div className="flex gap-4 mb-4">
-              <div className="flex-1">
-                <select name="gender" value={form.gender} onChange={handleChange} className="w-full p-2 rounded border border-gray-300">
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-                {errors.gender && <div className="text-red-600 text-xs mt-1">{errors.gender}</div>}
-              </div>
+            <div>
+              <select name="gender" value={form.gender} onChange={handleChange} className="w-full p-2 md:p-3 rounded border border-gray-300 text-sm md:text-base">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              {errors.gender && <div className="text-red-600 text-xs mt-1">{errors.gender}</div>}
             </div>
             {/* Available Days */}
-            <div className="mb-4">
-              <label className="font-bold mb-2 block">Available Working Days:</label>
-              <div className="flex gap-3 flex-wrap">
+            <div>
+              <label className="font-bold mb-2 block text-sm md:text-base">Available Work Days:</label>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 md:gap-3">
                 {daysOfWeek.map((day) => (
-                  <label key={day} className="flex items-center gap-1 cursor-pointer">
+                  <label key={day} className="flex items-center gap-1 cursor-pointer text-sm md:text-base">
                     <input
                       type="checkbox"
                       name="availableDays"
@@ -183,24 +181,23 @@ const ProfileForm = ({ onProfileAdded }) => {
           </div>
         </div>
         {/* Display selected days for demonstration */}
-        <div className="mt-6 mb-6">
-          <label className="font-bold text-blue-900 block mb-2">Selected Days:</label>
+        <div className="mt-4 md:mt-6 mb-4 md:mb-6">
+          <label className="font-bold text-blue-900 block mb-2 text-sm md:text-base">Selected Days:</label>
           <div className="flex gap-2 flex-wrap">
             {form.availableDays.length === 0 ? (
-              <span className="text-gray-400">None</span>
+              <span className="text-gray-400 text-sm md:text-base">None</span>
             ) : (
               form.availableDays.map((day) => (
-                <span key={day} className="bg-blue-900 text-white rounded-full px-4 py-1 text-sm font-medium shadow">{day}</span>
+                <span key={day} className="bg-blue-900 text-white rounded-full px-3 md:px-4 py-1 text-xs md:text-sm font-medium shadow">{day}</span>
               ))
             )}
           </div>
         </div>
-        <div className="flex gap-4">
-          <button type="submit" className="bg-orange-400 text-white border-none px-8 py-2 rounded font-bold cursor-pointer">SAVE</button>
-          <button type="button" onClick={handleReset} className="bg-blue-900 text-white border-none px-8 py-2 rounded font-bold cursor-pointer shadow">RESET</button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button type="submit" className="bg-orange-400 text-white border-none px-6 md:px-8 py-2 md:py-3 rounded font-bold cursor-pointer text-sm md:text-base hover:bg-orange-500 transition-colors">SAVE</button>
+          <button type="button" onClick={handleReset} className="bg-blue-900 text-white border-none px-6 md:px-8 py-2 md:py-3 rounded font-bold cursor-pointer shadow text-sm md:text-base hover:bg-blue-800 transition-colors">RESET</button>
         </div>
       </form>
-      
     </div>
   );
 };

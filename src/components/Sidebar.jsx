@@ -1,43 +1,75 @@
-import React from 'react';
-import { FaHome, FaUserCircle, FaUsers, FaCalendarWeek, FaList } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaHome, FaUserCircle, FaUsers, FaCalendarWeek, FaList, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const menuItems = [
+    { icon: FaHome, text: 'Add Profile', path: '/' },
+    { icon: FaUserCircle, text: 'All Profiles', path: '/profiles' },
+    { icon: FaUsers, text: 'Schedule Matcher', path: '/schedule-matcher' },
+    { icon: FaCalendarWeek, text: 'Weekly Schedule', path: '/weekly-schedule' },
+    { icon: FaList, text: 'Reserved', path: '/reserved' },
+  ];
+
   return (
-    <div style={{ width: '240px', height: '100vh', background: '#003399', display: 'flex', flexDirection: 'column', padding: 0 }}>
-      {/* Header */}
-      <div style={{ background: '#FFA500', padding: '32px 0 16px 0', textAlign: 'center' }}>
-        {/* Placeholder for logo */}
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ width: 48, height: 48, background: '#fff', borderRadius: '50%', margin: '0 auto' }}></div>
-        </div>
-        <div style={{ color: '#fff', fontWeight: 'bold', fontSize: 18, letterSpacing: 1 }}>JUICE</div>
-        <div style={{ color: '#fff', fontWeight: 'bold', fontSize: 16, letterSpacing: 1 }}>TECK</div>
+    <>
+      {/* Mobile Menu Button */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={toggleMobileMenu}
+          className="bg-blue-900 text-white p-2 rounded-lg shadow-lg"
+        >
+          {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </button>
       </div>
-      {/* Menu */}
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0, flex: 1 }}>
-        <li style={{ display: 'flex', alignItems: 'center', color: '#fff', padding: '20px 24px', borderBottom: '1px solid #002366', cursor: 'pointer' }}>
-          <FaHome style={{ color: '#FFA500', marginRight: 16, fontSize: 22 }} />
-          <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>Add Profile</Link>
-        </li>
-        <li style={{ display: 'flex', alignItems: 'center', color: '#fff', padding: '20px 24px', borderBottom: '1px solid #002366', cursor: 'pointer' }}>
-          <FaUserCircle style={{ color: '#FFA500', marginRight: 16, fontSize: 22 }} />
-          <Link to="/profiles" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>All Profiles</Link>
-        </li>
-        <li style={{ display: 'flex', items: 'center', color: '#fff', padding: '20px 24px', borderBottom: '1px solid #002366', cursor: 'pointer' }}>
-          <FaUsers style={{ color: '#FFA500', marginRight: 16, fontSize: 22 }} />
-          <Link to="/schedule-matcher" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>Schedule Matcher</Link>
-        </li>
-        <li style={{ display: 'flex', items: 'center', color: '#fff', padding: '20px 24px', borderBottom: '1px solid #002366', cursor: 'pointer' }}>
-          <FaCalendarWeek style={{ color: '#FFA500', marginRight: 16, fontSize: 22 }} />
-          <Link to="/weekly-schedule" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>Weekly Schedule</Link>
-        </li>
-        <li style={{ display: 'flex', items: 'center', color: '#fff', padding: '20px 24px', borderBottom: '1px solid #002366', cursor: 'pointer' }}>
-          <FaList style={{ color: '#FFA500', marginRight: 16, fontSize: 22 }} />
-          <Link to="/reserved" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>Reserved</Link>
-        </li>
-      </ul>
-    </div>
+
+      {/* Sidebar */}
+      <div className={`
+        fixed md:relative z-40
+        w-64 h-screen bg-blue-900
+        transform transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+      `}>
+        {/* Header */}
+        <div className="bg-orange-500 p-6 text-center">
+          <div className="mb-2">
+            <div className="w-12 h-12 bg-white rounded-full mx-auto"></div>
+          </div>
+          <div className="text-white font-bold text-lg tracking-wide">JUICE</div>
+          <div className="text-white font-bold text-base tracking-wide">TECK</div>
+        </div>
+
+        {/* Menu */}
+        <ul className="list-none p-0 m-0 flex-1">
+          {menuItems.map((item, index) => (
+            <li key={index} className="flex items-center text-white p-5 border-b border-blue-800 cursor-pointer hover:bg-blue-800 transition-colors">
+              <item.icon className="text-orange-500 mr-4 text-xl" />
+              <Link 
+                to={item.path} 
+                className="text-white no-underline font-bold hover:text-orange-300 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

@@ -166,99 +166,112 @@ const ProfileList = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f4f4f4' }}>
+    <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <header style={{ background: '#003399', color: '#fff', padding: '20px 0', textAlign: 'center', fontSize: 24, fontWeight: 'bold', letterSpacing: 1 }}>
-        All Profile List
+      <header className="bg-blue-900 text-white p-4 md:p-6 text-center">
+        <h1 className="text-xl md:text-2xl font-bold tracking-wide">All Profile List</h1>
       </header>
+      
       {/* Main Content */}
-      <main style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: 32 }}>
-        <div style={{ background: '#fff', borderRadius: 6, boxShadow: '0 2px 8px #eee', padding: 32, width: '100%', maxWidth: 1200 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-            <span style={{ color: '#888', fontSize: 14 }}>Home - <span style={{ color: '#003399', fontWeight: 500 }}>All Profile List</span></span>
-            <div>
+      <main className="flex-1 flex justify-center items-start p-4 md:p-8">
+        <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 w-full max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <span className="text-gray-600 text-sm md:text-base">
+              Home - <span className="text-blue-900 font-medium">All Profile List</span>
+            </span>
+            <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
               <input
                 type="text"
                 placeholder="Type Name or Email..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                style={{ padding: 8, borderRadius: 4, border: '1px solid #ccc', marginRight: 8 }}
+                className="px-3 py-2 rounded border border-gray-300 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
-              <button style={{ background: '#003399', color: '#fff', border: 'none', padding: '8px 24px', borderRadius: 4, fontWeight: 'bold', cursor: 'pointer' }}>SEARCH</button>
+              <button className="bg-blue-900 text-white border-none px-4 md:px-6 py-2 rounded font-bold cursor-pointer text-sm md:text-base hover:bg-blue-800 transition-colors">
+                SEARCH
+              </button>
             </div>
           </div>
+          
           {loading ? (
-            <div>Loading...</div>
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900"></div>
+              <span className="ml-2">Loading...</span>
+            </div>
           ) : error ? (
-            <div style={{ color: 'red' }}>{error}</div>
+            <div className="text-red-600 text-center py-8">{error}</div>
           ) : (
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
-              <thead>
-                <tr style={{ background: '#f4f4f4' }}>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}><input type="checkbox" /></th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>ID No.</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Photo</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Name</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Gender</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Mobile No.</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Email</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Next of Kin 1</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Next of Kin 2</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Available Days</th>
-                  <th style={{ padding: 8, border: '1px solid #ddd' }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredProfiles.map((profile, idx) => (
-                  <tr key={profile._id}>
-                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}><input type="checkbox" /></td>
-                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}># {2901 + idx}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>
-                      {profile.photo ? (
-                        <img src={`http://localhost:9000/uploads/${profile.photo}`} alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
-                      ) : (
-                        <span style={{ color: '#aaa' }}>No Photo</span>
-                      )}
-                    </td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.firstName} {profile.lastName}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.gender || '-'}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.phone}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.email}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.kin1}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{profile.kin2}</td>
-                    <td style={{ padding: 8, border: '1px solid #ddd' }}>
-                      {profile.availableDays && profile.availableDays.length > 0 ? (
-                        profile.availableDays.map((day, i) => (
-                          <span key={i} style={{ background: '#003399', color: '#fff', borderRadius: 8, padding: '2px 8px', marginRight: 4, fontSize: 12 }}>{day}</span>
-                        ))
-                      ) : (
-                        <span style={{ color: '#aaa' }}>None</span>
-                      )}
-                    </td>
-                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>
-                      <div className="flex items-center justify-center space-x-3">
-                        <button title="View" className="text-gray-700 hover:text-blue-600 cursor-pointer" onClick={() => setViewProfile(profile)}>
-                          <FaEye size={20} />
-                        </button>
-                        <button title="Edit" className="text-green-600 hover:text-green-800 cursor-pointer" onClick={() => openEditModal(profile)}>
-                          <FaEdit size={20} />
-                        </button>
-                        <button title="Delete" className="text-red-600 hover:text-red-800 cursor-pointer" onClick={() => setDeleteProfile(profile)}>
-                          <FaTrash size={20} />
-                        </button>
-                      </div>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm md:text-base">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">ID No.</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Photo</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Name</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Gender</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Mobile No.</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Email</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Next of Kin 1</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Next of Kin 2</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Available Days</th>
+                    <th className="p-2 md:p-3 border border-gray-300 text-left">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredProfiles.map((profile, idx) => (
+                    <tr key={profile._id} className="hover:bg-gray-50">
+                      <td className="p-2 md:p-3 border border-gray-300 text-center"># {2901 + idx}</td>
+                      <td className="p-2 md:p-3 border border-gray-300 text-center">
+                        {profile.photo ? (
+                          <img src={`http://localhost:9000/uploads/${profile.photo}`} alt="Profile" className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover mx-auto" />
+                        ) : (
+                          <span className="text-gray-400 text-xs">No Photo</span>
+                        )}
+                      </td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.firstName} {profile.lastName}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.gender || '-'}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.phone}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.email}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.kin1}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">{profile.kin2}</td>
+                      <td className="p-2 md:p-3 border border-gray-300">
+                        {profile.availableDays && profile.availableDays.length > 0 ? (
+                          <div className="flex flex-wrap gap-1">
+                            {profile.availableDays.map((day, i) => (
+                              <span key={i} className="bg-blue-900 text-white rounded-full px-2 py-1 text-xs font-medium">
+                                {day.slice(0, 3)}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-gray-400 text-xs">None</span>
+                        )}
+                      </td>
+                      <td className="p-2 md:p-3 border border-gray-300 text-center">
+                        <div className="flex items-center justify-center space-x-2">
+                          <button title="View" className="text-gray-700 hover:text-blue-600 cursor-pointer p-1" onClick={() => setViewProfile(profile)}>
+                            <FaEye size={16} />
+                          </button>
+                          <button title="Edit" className="text-green-600 hover:text-green-800 cursor-pointer p-1" onClick={() => openEditModal(profile)}>
+                            <FaEdit size={16} />
+                          </button>
+                          <button title="Delete" className="text-red-600 hover:text-red-800 cursor-pointer p-1" onClick={() => setDeleteProfile(profile)}>
+                            <FaTrash size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </main>
       {/* View Profile Modal */}
       {viewProfile && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
-          <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md relative">
+          <div className="bg-white rounded-lg shadow-xl p-4 md:p-8 w-full max-w-md mx-4 relative">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl font-bold cursor-pointer"
               onClick={() => setViewProfile(null)}
@@ -268,27 +281,29 @@ const ProfileList = () => {
             </button>
             <div className="flex flex-col items-center mb-4">
               {viewProfile.photo ? (
-                <img src={`http://localhost:9000/uploads/${viewProfile.photo}`} alt="Profile" className="w-24 h-24 rounded-full object-cover mb-2" />
+                <img src={`http://localhost:9000/uploads/${viewProfile.photo}`} alt="Profile" className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover mb-2" />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mb-2">No Photo</div>
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-200 flex items-center justify-center mb-2 text-sm">No Photo</div>
               )}
-              <h3 className="text-xl font-bold mb-1">{viewProfile.firstName} {viewProfile.lastName}</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-1 text-center">{viewProfile.firstName} {viewProfile.lastName}</h3>
               <div className="text-gray-600 mb-1">{viewProfile.gender}</div>
             </div>
-            <div className="mb-2"><span className="font-semibold">Email:</span> {viewProfile.email}</div>
-            <div className="mb-2"><span className="font-semibold">Phone:</span> {viewProfile.phone}</div>
-            <div className="mb-2"><span className="font-semibold">Next of Kin 1:</span> {viewProfile.kin1}</div>
-            <div className="mb-2"><span className="font-semibold">Next of Kin 2:</span> {viewProfile.kin2}</div>
-            <div className="mb-2">
-              <span className="font-semibold">Available Days:</span>
-              <div className="flex gap-2 flex-wrap mt-1">
-                {viewProfile.availableDays && viewProfile.availableDays.length > 0 ? (
-                  viewProfile.availableDays.map((day, i) => (
-                    <span key={i} className="bg-blue-900 text-white rounded-full px-3 py-1 text-xs font-medium shadow">{day}</span>
-                  ))
-                ) : (
-                  <span className="text-gray-400">None</span>
-                )}
+            <div className="space-y-2 text-sm md:text-base">
+              <div><span className="font-semibold">Email:</span> {viewProfile.email}</div>
+              <div><span className="font-semibold">Phone:</span> {viewProfile.phone}</div>
+              <div><span className="font-semibold">Next of Kin 1:</span> {viewProfile.kin1}</div>
+              <div><span className="font-semibold">Next of Kin 2:</span> {viewProfile.kin2}</div>
+              <div>
+                <span className="font-semibold">Available Days:</span>
+                <div className="flex gap-2 flex-wrap mt-1">
+                  {viewProfile.availableDays && viewProfile.availableDays.length > 0 ? (
+                    viewProfile.availableDays.map((day, i) => (
+                      <span key={i} className="bg-blue-900 text-white rounded-full px-2 py-1 text-xs font-medium shadow">{day}</span>
+                    ))
+                  ) : (
+                    <span className="text-gray-400">None</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

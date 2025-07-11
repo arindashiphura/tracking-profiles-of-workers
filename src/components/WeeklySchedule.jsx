@@ -63,7 +63,7 @@ const WeeklySchedule = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-md shadow p-8 m-8">
+      <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
         <div className="flex items-center justify-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900"></div>
           <span className="ml-2">Loading schedules...</span>
@@ -74,7 +74,7 @@ const WeeklySchedule = () => {
 
   if (error) {
     return (
-      <div className="bg-white rounded-md shadow p-8 m-8">
+      <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
         <div className="text-red-600 text-center">{error}</div>
         <button 
           onClick={fetchProfiles}
@@ -87,17 +87,17 @@ const WeeklySchedule = () => {
   }
 
   return (
-    <div className="bg-white rounded-md shadow p-8 m-8">
-      <div className="flex items-center gap-2 mb-6">
-        <FaCalendarWeek className="text-blue-900 text-2xl" />
-        <h2 className="text-2xl font-bold text-blue-900">Weekly Schedule</h2>
+    <div className="bg-white rounded-lg shadow-lg p-4 md:p-8 m-2 md:m-8">
+      <div className="flex items-center gap-2 mb-4 md:mb-6">
+        <FaCalendarWeek className="text-blue-900 text-xl md:text-2xl" />
+        <h2 className="text-xl md:text-2xl font-bold text-blue-900">Weekly Schedule</h2>
       </div>
 
       {/* View Mode Toggle */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-2 md:gap-4 mb-4 md:mb-6">
         <button
           onClick={() => setViewMode('weekly')}
-          className={`px-4 py-2 rounded font-medium ${
+          className={`px-3 md:px-4 py-2 rounded font-medium text-sm md:text-base ${
             viewMode === 'weekly' 
               ? 'bg-blue-900 text-white' 
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -107,7 +107,7 @@ const WeeklySchedule = () => {
         </button>
         <button
           onClick={() => setViewMode('daily')}
-          className={`px-4 py-2 rounded font-medium ${
+          className={`px-3 md:px-4 py-2 rounded font-medium text-sm md:text-base ${
             viewMode === 'daily' 
               ? 'bg-blue-900 text-white' 
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -118,12 +118,12 @@ const WeeklySchedule = () => {
       </div>
 
       {/* Summary Stats */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
-        <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+      <div className="bg-gray-50 rounded-lg p-3 md:p-4 mb-4 md:mb-6">
+        <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2 text-sm md:text-base">
           <FaUsers className="text-blue-900" />
           Schedule Summary
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-xs md:text-sm">
           <div>
             <div className="text-gray-600">Total Staff</div>
             <div className="font-bold text-blue-900">{profiles.length}</div>
@@ -151,7 +151,7 @@ const WeeklySchedule = () => {
 
       {viewMode === 'weekly' ? (
         /* Weekly View */
-        <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 md:gap-4">
           {daysOfWeek.map((day) => {
             const dayProfiles = getProfilesForDay(day);
             const isSelected = selectedDay === day;
@@ -159,7 +159,7 @@ const WeeklySchedule = () => {
             return (
               <div 
                 key={day} 
-                className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                className={`border rounded-lg p-2 md:p-4 cursor-pointer transition-all ${
                   isSelected 
                     ? 'border-blue-900 bg-blue-50' 
                     : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
@@ -174,30 +174,30 @@ const WeeklySchedule = () => {
                   }
                 }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-bold text-gray-800">{day}</h3>
-                  <span className="bg-blue-900 text-white rounded-full px-2 py-1 text-xs font-medium">
+                <div className="flex items-center justify-between mb-2 md:mb-3">
+                  <h3 className="font-bold text-gray-800 text-xs md:text-sm lg:text-base">{day}</h3>
+                  <span className="bg-blue-900 text-white rounded-full px-1 md:px-2 py-1 text-xs font-medium">
                     {dayProfiles.length}
                   </span>
                 </div>
                 
                 {dayProfiles.length === 0 ? (
-                  <div className="text-center py-4 text-gray-400">
-                    <FaUser className="text-2xl mx-auto mb-1" />
+                  <div className="text-center py-2 md:py-4 text-gray-400">
+                    <FaUser className="text-lg md:text-2xl mx-auto mb-1" />
                     <p className="text-xs">No staff</p>
                   </div>
                 ) : (
-                  <div className="space-y-2">
+                  <div className="space-y-1 md:space-y-2">
                     {dayProfiles.slice(0, 3).map((profile) => (
-                      <div key={profile._id} className="flex items-center gap-2">
+                      <div key={profile._id} className="flex items-center gap-1 md:gap-2">
                         {profile.photo ? (
                           <img 
                             src={`http://localhost:9000/uploads/${profile.photo}`} 
                             alt="Profile" 
-                            className="w-6 h-6 rounded-full object-cover"
+                            className="w-4 h-4 md:w-6 md:h-6 rounded-full object-cover"
                           />
                         ) : (
-                          <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
+                          <div className="w-4 h-4 md:w-6 md:h-6 rounded-full bg-gray-200 flex items-center justify-center">
                             <FaUser className="text-xs text-gray-400" />
                           </div>
                         )}
@@ -222,8 +222,8 @@ const WeeklySchedule = () => {
         <div>
           {selectedDay ? (
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-gray-800 flex items-center gap-2">
                   <FaClock className="text-blue-900" />
                   {selectedDay} - Staff Schedule
                 </h3>
@@ -232,53 +232,53 @@ const WeeklySchedule = () => {
                     setSelectedDay(null);
                     setViewMode('weekly');
                   }}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 text-sm md:text-base"
                 >
                   ← Back to Weekly View
                 </button>
               </div>
               
-              <div className="grid gap-4">
+              <div className="grid gap-3 md:gap-4">
                 {getProfilesForDay(selectedDay).map((profile) => (
-                  <div key={profile._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start gap-4">
+                  <div key={profile._id} className="border border-gray-200 rounded-lg p-3 md:p-4 hover:shadow-md transition-shadow">
+                    <div className="flex flex-col md:flex-row items-start gap-3 md:gap-4">
                       {/* Profile Photo */}
                       <div className="flex-shrink-0">
                         {profile.photo ? (
                           <img 
                             src={`http://localhost:9000/uploads/${profile.photo}`} 
                             alt="Profile" 
-                            className="w-16 h-16 rounded-full object-cover"
+                            className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                           />
                         ) : (
-                          <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
-                            <span className="text-gray-400 text-sm">No Photo</span>
+                          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gray-200 flex items-center justify-center">
+                            <span className="text-gray-400 text-xs md:text-sm">No Photo</span>
                           </div>
                         )}
                       </div>
 
                       {/* Profile Info */}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h4 className="text-lg font-semibold text-gray-800">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 mb-2">
+                          <h4 className="text-base md:text-lg font-semibold text-gray-800 truncate">
                             {profile.firstName} {profile.lastName}
                           </h4>
-                          <span className="text-sm text-gray-500">({profile.gender})</span>
+                          <span className="text-xs md:text-sm text-gray-500">({profile.gender})</span>
                         </div>
                         
-                        <div className="text-sm text-gray-600 mb-3">
-                          <div>{profile.email}</div>
+                        <div className="text-xs md:text-sm text-gray-600 mb-3 space-y-1">
+                          <div className="truncate">{profile.email}</div>
                           <div>{profile.phone}</div>
                         </div>
 
                         {/* Full Schedule */}
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Full Schedule:</span>
+                          <span className="text-xs md:text-sm font-medium text-gray-700">Full Schedule:</span>
                           <div className="flex gap-1 flex-wrap mt-1">
                             {daysOfWeek.map((day) => (
                               <span 
                                 key={day} 
-                                className={`rounded-full px-2 py-1 text-xs font-medium ${
+                                className={`rounded-full px-1 md:px-2 py-1 text-xs font-medium ${
                                   profile.availableDays && profile.availableDays.includes(day)
                                     ? day === selectedDay
                                       ? 'bg-blue-900 text-white'
@@ -295,11 +295,11 @@ const WeeklySchedule = () => {
 
                       {/* Contact Info */}
                       <div className="flex-shrink-0 text-right">
-                        <div className="text-sm text-gray-600">
+                        <div className="text-xs md:text-sm text-gray-600">
                           <div>Next of Kin 1:</div>
                           <div className="font-medium">{profile.kin1 || 'N/A'}</div>
                         </div>
-                        <div className="text-sm text-gray-600 mt-2">
+                        <div className="text-xs md:text-sm text-gray-600 mt-2">
                           <div>Next of Kin 2:</div>
                           <div className="font-medium">{profile.kin2 || 'N/A'}</div>
                         </div>
@@ -311,29 +311,29 @@ const WeeklySchedule = () => {
             </div>
           ) : (
             <div className="text-center py-8 text-gray-500">
-              <FaCalendarWeek className="text-4xl mx-auto mb-2 text-gray-300" />
-              <p>Click on any day above to view detailed staff schedule</p>
+              <FaCalendarWeek className="text-3xl md:text-4xl mx-auto mb-2 text-gray-300" />
+              <p className="text-sm md:text-base">Click on any day above to view detailed staff schedule</p>
             </div>
           )}
         </div>
       )}
 
       {/* Popular Days Chart */}
-      <div className="mt-8 bg-gray-50 rounded-lg p-4">
-        <h3 className="font-semibold text-gray-800 mb-3">Staff Distribution by Day</h3>
+      <div className="mt-6 md:mt-8 bg-gray-50 rounded-lg p-3 md:p-4">
+        <h3 className="font-semibold text-gray-800 mb-3 text-sm md:text-base">Staff Distribution by Day</h3>
         <div className="space-y-2">
           {getMostPopularDays().map(({ day, count }) => (
             <div key={day} className="flex items-center gap-3">
-              <div className="w-20 text-sm font-medium text-gray-700">{day}</div>
-              <div className="flex-1 bg-gray-200 rounded-full h-4">
+              <div className="w-16 md:w-20 text-xs md:text-sm font-medium text-gray-700">{day}</div>
+              <div className="flex-1 bg-gray-200 rounded-full h-3 md:h-4">
                 <div 
-                  className="bg-blue-900 h-4 rounded-full transition-all duration-300"
+                  className="bg-blue-900 h-3 md:h-4 rounded-full transition-all duration-300"
                   style={{ 
                     width: `${(count / Math.max(...getMostPopularDays().map(d => d.count))) * 100}%` 
                   }}
                 ></div>
               </div>
-              <div className="w-8 text-sm font-bold text-gray-700">{count}</div>
+              <div className="w-6 md:w-8 text-xs md:text-sm font-bold text-gray-700">{count}</div>
             </div>
           ))}
         </div>
