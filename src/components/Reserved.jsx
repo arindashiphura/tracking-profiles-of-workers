@@ -23,7 +23,7 @@ const Reserved = () => {
   const fetchProfiles = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:9000/api/profiles');
+      const response = await fetch('http://localhost:10000/api/profiles');
       if (response.ok) {
         const data = await response.json();
         setProfiles(data);
@@ -197,7 +197,7 @@ const Reserved = () => {
                 <div className="flex-shrink-0">
                   {profile.photo ? (
                     <img 
-                      src={`http://localhost:9000/uploads/${profile.photo}`} 
+                      src={`http://localhost:10000/uploads/${profile.photo}`} 
                       alt="Profile" 
                       className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-gray-200"
                     />

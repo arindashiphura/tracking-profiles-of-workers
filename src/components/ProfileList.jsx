@@ -27,7 +27,7 @@ const ProfileList = () => {
 
   const fetchProfiles = async () => {
     try {
-      const res = await fetch('http://localhost:9000/api/profiles');
+      const res = await fetch('http://localhost:10000/api/profiles');
       if (!res.ok) throw new Error('Failed to fetch profiles');
       const data = await res.json();
       setProfiles(data);
@@ -126,7 +126,7 @@ const ProfileList = () => {
       formData.append('photo', editReview.photo);
     }
     try {
-      const response = await fetch(`http://localhost:9000/api/profiles/${editReview._id}`, {
+      const response = await fetch(`http://localhost:10000/api/profiles/${editReview._id}`, {
         method: 'PUT',
         body: formData,
       });
@@ -149,7 +149,7 @@ const ProfileList = () => {
   const handleDelete = async () => {
     if (!deleteProfile) return;
     try {
-      const response = await fetch(`http://localhost:9000/api/profiles/${deleteProfile._id}`, {
+      const response = await fetch(`http://localhost:10000/api/profiles/${deleteProfile._id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -223,7 +223,7 @@ const ProfileList = () => {
                       <td className="p-2 md:p-3 border border-gray-300 text-center"># {2901 + idx}</td>
                       <td className="p-2 md:p-3 border border-gray-300 text-center">
                         {profile.photo ? (
-                          <img src={`http://localhost:9000/uploads/${profile.photo}`} alt="Profile" className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover mx-auto" />
+                          <img src={`http://localhost:10000/uploads/${profile.photo}`} alt="Profile" className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover mx-auto" />
                         ) : (
                           <span className="text-gray-400 text-xs">No Photo</span>
                         )}
@@ -281,7 +281,7 @@ const ProfileList = () => {
             </button>
             <div className="flex flex-col items-center mb-4">
               {viewProfile.photo ? (
-                <img src={`http://localhost:9000/uploads/${viewProfile.photo}`} alt="Profile" className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover mb-2" />
+                <img src={`http://localhost:10000/uploads/${viewProfile.photo}`} alt="Profile" className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover mb-2" />
               ) : (
                 <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-200 flex items-center justify-center mb-2 text-sm">No Photo</div>
               )}
@@ -324,7 +324,7 @@ const ProfileList = () => {
             <form onSubmit={handleEditSubmit}>
               <div className="flex flex-col items-center mb-4">
                 {editProfile.photo && !editForm.photo ? (
-                  <img src={`http://localhost:9000/uploads/${editProfile.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
+                  <img src={`http://localhost:10000/uploads/${editProfile.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
                 ) : editForm.photo ? (
                   <img src={URL.createObjectURL(editForm.photo)} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
                 ) : (
@@ -414,7 +414,7 @@ const ProfileList = () => {
             <div className="flex flex-col items-center mb-4">
               {editReview.reviewPhoto ? (
                 typeof editReview.reviewPhoto === 'string' ? (
-                  <img src={`http://localhost:9000/uploads/${editReview.reviewPhoto}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
+                  <img src={`http://localhost:10000/uploads/${editReview.reviewPhoto}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
                 ) : (
                   <img src={URL.createObjectURL(editReview.reviewPhoto)} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
                 )
@@ -464,7 +464,7 @@ const ProfileList = () => {
             <h3 className="text-xl font-bold mb-4 text-green-700">Last Profile Updated Successfully!</h3>
             <div className="flex flex-col items-center mb-4">
               {editSuccess.photo ? (
-                <img src={`http://localhost:9000/uploads/${editSuccess.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
+                <img src={`http://localhost:10000/uploads/${editSuccess.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
               ) : (
                 <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-2">No Photo</div>
               )}
@@ -503,7 +503,7 @@ const ProfileList = () => {
             <h3 className="text-xl font-bold mb-4 text-red-700">Confirm Delete</h3>
             <div className="flex flex-col items-center mb-4">
               {deleteProfile.photo ? (
-                <img src={`http://localhost:9000/uploads/${deleteProfile.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
+                <img src={`http://localhost:10000/uploads/${deleteProfile.photo}`} alt="Profile" className="w-20 h-20 rounded-full object-cover mb-2" />
               ) : (
                 <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-2">No Photo</div>
               )}

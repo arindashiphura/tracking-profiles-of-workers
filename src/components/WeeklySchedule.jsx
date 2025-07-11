@@ -22,7 +22,7 @@ const WeeklySchedule = () => {
   const fetchProfiles = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:9000/api/profiles');
+      const response = await fetch('http://localhost:10000/api/profiles');
       if (response.ok) {
         const data = await response.json();
         setProfiles(data);
@@ -192,7 +192,7 @@ const WeeklySchedule = () => {
                       <div key={profile._id} className="flex items-center gap-1 md:gap-2">
                         {profile.photo ? (
                           <img 
-                            src={`http://localhost:9000/uploads/${profile.photo}`} 
+                            src={`http://localhost:10000/uploads/${profile.photo}`} 
                             alt="Profile" 
                             className="w-4 h-4 md:w-6 md:h-6 rounded-full object-cover"
                           />
@@ -246,7 +246,7 @@ const WeeklySchedule = () => {
                       <div className="flex-shrink-0">
                         {profile.photo ? (
                           <img 
-                            src={`http://localhost:9000/uploads/${profile.photo}`} 
+                            src={`http://localhost:10000/uploads/${profile.photo}`} 
                             alt="Profile" 
                             className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover"
                           />
