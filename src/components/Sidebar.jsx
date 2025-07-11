@@ -41,8 +41,8 @@ const Sidebar = () => {
           <div className="mb-2">
             <div className="w-12 h-12 bg-white rounded-full mx-auto"></div>
           </div>
-          <div className="text-white font-bold text-lg tracking-wide">JUICE</div>
-          <div className="text-white font-bold text-base tracking-wide">TECK</div>
+          <div className="text-white font-bold text-lg tracking-wide">TEK</div>
+          <div className="text-white font-bold text-base tracking-wide">JUICE</div>
         </div>
 
         {/* Menu */}
