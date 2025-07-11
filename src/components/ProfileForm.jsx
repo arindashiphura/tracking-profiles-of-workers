@@ -82,7 +82,7 @@ const ProfileForm = ({ onProfileAdded }) => {
     form.availableDays.forEach(day => formData.append('availableDays', day));
 
     try {
-      const response = await fetch('http://localhost:9000/api/profiles', {
+      const response = await fetch('http://localhost:10000/api/profiles', {
         method: 'POST',
         body: formData,
       });
