@@ -294,7 +294,7 @@ const ProfileList = () => {
               <div><span className="font-semibold">Next of Kin 1:</span> {viewProfile.kin1}</div>
               <div><span className="font-semibold">Next of Kin 2:</span> {viewProfile.kin2}</div>
               <div>
-                <span className="font-semibold">Available Days:</span>
+                <span className="font-semibold">Available  Working Days:</span>
                 <div className="flex gap-2 flex-wrap mt-1">
                   {viewProfile.availableDays && viewProfile.availableDays.length > 0 ? (
                     viewProfile.availableDays.map((day, i) => (
