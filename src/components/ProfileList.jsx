@@ -429,7 +429,7 @@ const ProfileList = () => {
             <div className="mb-2"><span className="font-semibold">Next of Kin 1:</span> {editReview.kin1}</div>
             <div className="mb-2"><span className="font-semibold">Next of Kin 2:</span> {editReview.kin2}</div>
             <div className="mb-2">
-              <span className="font-semibold">Available Days:</span>
+              <span className="font-semibold">Available Working Days:</span>
               <div className="flex gap-2 flex-wrap mt-1">
                 {editReview.availableDays && editReview.availableDays.length > 0 ? (
                   editReview.availableDays.map((day, i) => (
@@ -476,7 +476,7 @@ const ProfileList = () => {
             <div className="mb-2"><span className="font-semibold">Next of Kin 1:</span> {editSuccess.kin1}</div>
             <div className="mb-2"><span className="font-semibold">Next of Kin 2:</span> {editSuccess.kin2}</div>
             <div className="mb-2">
-              <span className="font-semibold">Available Days:</span>
+              <span className="font-semibold">Available  Working Days:</span>
               <div className="flex gap-2 flex-wrap mt-1">
                 {editSuccess.availableDays && editSuccess.availableDays.length > 0 ? (
                   editSuccess.availableDays.map((day, i) => (
@@ -559,7 +559,7 @@ const ProfileList = () => {
       )}
       {/* Footer */}
       <footer style={{ background: '#003399', color: '#fff', textAlign: 'center', padding: 16, fontSize: 16 }}>
-        &copy; {new Date().getFullYear()} Expense Tracker
+        &copy; {new Date().getFullYear()} Profile Tracker
       </footer>
     </div>
   );
